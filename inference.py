@@ -22,7 +22,7 @@ def single_predict():
     :return:
     """
 
-    ismale = request.args.get('ismale')
+    ismale = request.args.get('is_male')
     num_inters = request.args.get('num_inters')
     late_on_payment = request.args.get('late_on_payment')
     age = request.args.get('age')
