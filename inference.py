@@ -16,14 +16,28 @@ def get_model(filename):
 
 @app.route('/predict_churn')
 def single_predict():
+    """
+    function that receives the data from the user and predicts if will churn and returns
+    a string "0" or "1"
+    :return:
+    """
+
     ismale = request.args.get('ismale')
     num_inters = request.args.get('num_inters')
     late_on_payment = request.args.get('late_on_payment')
     age = request.args.get('age')
     years_in_contract = request.args.get('years_in_contract')
+    data =[ismale,num_inters,late_on_payment,age,years_in_contract]
+    for d in data:
+        print(d,type(d))
 
 
-    return "What pill will you take "+request.args.get('name') + '?'
+    data = [float(elem) for elem in data]
+    data = np.array(data).reshape(1,-1)
+    prediction = str(int(clf.predict(data)))
+
+
+    return prediction
 
 
 
@@ -37,7 +51,8 @@ def main():
     assert (y_pred == preds).all()
     #if there's no error, it means they are the same.
 
-
+    return clf
 
 if __name__ == '__main__':
-    main()
+    clf = main()
+    app.run()
