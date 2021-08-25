@@ -39,9 +39,6 @@ def single_predict():
 
     return prediction
 
-
-
-
 def main():
     clf = get_model('churn_model.pkl')
     X_test = pd.read_csv('X_test.csv')
